@@ -28,7 +28,6 @@ EOF
 resource "aws_iam_role_policy_attachment" "cloudsploit_cross_account_attach" {
   # disable this if use_aws_gov == true
   count = "${var.use_aws_gov ? 0 : 1}"
-
-  role       = "${aws_iam_role.cloudsploit_cross_account_role.name}"
+  role       = "${aws_iam_role.cloudsploit_cross_account_role[count.index].name}" 
   policy_arn = "arn:aws:iam::aws:policy/SecurityAudit"
 }
